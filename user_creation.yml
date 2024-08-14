@@ -1,0 +1,17 @@
+---
+  - name:
+    hosts: test
+    become: true
+    tasks:
+      - name: User Creation
+        ansible.builtin.user:
+          name: Tree3
+          comment: Tree one
+          uid: 1113
+          group: root
+      - name: Display user
+        shell: id Tree3; chage -l Tree3
+        register: Display
+      - name: Display user details
+        debug:
+          var: Display.stdout
